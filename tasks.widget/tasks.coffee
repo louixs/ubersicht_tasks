@@ -34,7 +34,7 @@ CLIENT_SECRET:""
 AUTHORIZATION_CODE:""
 
 # Enter the number of tasks you want to display
-TASK_COUNT:"3"
+TASK_COUNT:"5"
 TASKS_TITLE: "-- To do --"
 
 refreshFrequency: "30m" #30 min.
@@ -101,7 +101,7 @@ style: """
   font-family: hack
   font-weight: 100
   font-size: 11px
-  top: 35%
+  top: 40%
   left: 2%
   line-height: 1.5
   //margin-left: -40px
