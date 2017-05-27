@@ -34,7 +34,7 @@ CLIENT_SECRET:""
 AUTHORIZATION_CODE:""
 
 # Enter the number of tasks you want to display
-TASK_COUNT:"5"
+TASK_COUNT:"7"
 TASKS_TITLE: "-- To do --"
 
 refreshFrequency: "30m" #30 min.
