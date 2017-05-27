@@ -73,16 +73,16 @@ readonly TASK_COUNT=$(sed -e 1b "$COFFEE_FILE" | grep TASK_COUNT | sed 's/.*://'
 
 # get task list id
 # need a better way to get id and store it elsewhere automatically in the future
-local TASK_LIST_ID_FROM_CONFIG=$(sed -e 1b "$CONFIG_FILE" | grep TASK_ID | sed 's/.*://' | xargs)
+readonly TASK_LIST_ID_FROM_CONFIG=$(sed -e 1b "$CONFIG_FILE" | grep TASK_ID | sed 's/.*://' | xargs)
 
 # this should be changed to task names as there is no easy way to find task ids from UI
 # need to add a functionality to retrie list id from list name 
-local TASK_LIST_ID_FROM_COFFEE=$(sed -e 1b "$COFFEE_FILE" | grep TASK_ID | sed 's/.*://' | xargs)
+# readonly TASK_LIST_ID_FROM_COFFEE=$(sed -e 1b "$COFFEE_FILE" | grep TASK_ID | sed 's/.*://' | xargs)
 
 function tasksSetup(){    
   #google tasks api ref
   #https://developers.google.com/google-apps/tasks/v1/reference/
-  INBOX="https://www.googleapis.com/tasks/v1/lists/$TASK_LIST_ID/tasks"
+  INBOX="https://www.googleapis.com/tasks/v1/lists/$TASK_LIST_ID_FROM_CONFIG/tasks"
 }
 
 tasksSetup
