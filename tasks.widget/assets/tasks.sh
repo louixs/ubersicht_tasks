@@ -15,7 +15,6 @@ function runDebugLogger(){
 # Uncomment the below to enalbe the debugger
 #runDebugLogger
 
-
 function exitIfFail(){
   #https://sanctum.geek.nz/arabesque/testing-exit-values-bash/
   if $1; then
@@ -23,6 +22,15 @@ function exitIfFail(){
   else
   echo "Hmm... Seems some important pieces are missing. Please follow the instruction specified above and re-run this file as ./tasks.sh after taking necessary action"
     exit 1
+  fi
+}
+
+function varExists(){
+  # check if the variable exists or not
+  if [ "$1" ]; then
+     echo 1 # var exists
+  else
+     echo 0 # var does not exist
   fi
 }
 
@@ -63,10 +71,18 @@ readonly ACCESS_TOKEN=$(cat "$TOKEN_FILE" | grep access_token | awk '{print $2}'
 readonly TASK_LISTS="https://www.googleapis.com/tasks/v1/users/@me/lists"
 readonly TASK_COUNT=$(sed -e 1b "$COFFEE_FILE" | grep TASK_COUNT | sed 's/.*://' | sed 's/"//' | sed '$s/"/ /g' | xargs)
 
-function tasksSetup(){
+# get task list id
+# need a better way to get id and store it elsewhere automatically in the future
+local TASK_LIST_ID_FROM_CONFIG=$(sed -e 1b "$CONFIG_FILE" | grep TASK_ID | sed 's/.*://' | xargs)
+
+# this should be changed to task names as there is no easy way to find task ids from UI
+# need to add a functionality to retrie list id from list name 
+local TASK_LIST_ID_FROM_COFFEE=$(sed -e 1b "$COFFEE_FILE" | grep TASK_ID | sed 's/.*://' | xargs)
+
+function tasksSetup(){    
   #google tasks api ref
   #https://developers.google.com/google-apps/tasks/v1/reference/
-  INBOX=https://www.googleapis.com/tasks/v1/lists/***REMOVED***/tasks
+  INBOX="https://www.googleapis.com/tasks/v1/lists/$TASK_LIST_ID/tasks"
 }
 
 tasksSetup
